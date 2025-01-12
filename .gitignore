@@ -1,0 +1,12 @@
+# Node.js
+client/node_modules/
+client/build/
+
+# Java
+app.backend/target/
+
+# System Files
+.DS_Store
+.idea/
+*.iml
+*.log
