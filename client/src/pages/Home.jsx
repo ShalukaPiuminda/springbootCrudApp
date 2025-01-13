@@ -43,13 +43,14 @@ export default function Home() {
                 <td className="py-3 px-4">{user.name}</td>
                 <td className="py-3 px-4">{user.email}</td>
                 <td className="py-3 px-3 text-center flex justify-center gap-4">
-                  <button
+                  <Link
+                    to={`/viewuser/${user.id}`}
                     type="button"
                     className="flex items-center justify-center gap-2 py-2.5 px-3 mb-2 text-sm font-medium text-black focus:outline-none rounded-lg border border-gray-300 hover:text-gray-500 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-gray-400 dark:border-gray-600 dark:hover:text-gray-400"
                   >
                     <FaEye className="mr-1 text-black hover:text-gray-500" />
                     <span className="text-black hover:text-gray-500">View</span>
-                  </button>
+                  </Link>
                   <Link
                     to={`/edituser/${user.id}`}
                     type="button"

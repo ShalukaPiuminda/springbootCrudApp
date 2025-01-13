@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import AddUsers from './users/AddUsers';
 import About from './pages/About';
 import EditUsers from './users/EditUser';
+import ViewUser from './users/ViewUser';
 
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
         <Route path='/adduser' element={<AddUsers/>}/>
         <Route path='/about' element={<About/>}/>
         <Route path='/edituser/:id' element={<EditUsers/>}/>
+        <Route path='/viewuser/:id' element={<ViewUser/>}/>
       </Routes>
     </BrowserRouter>
   );
