@@ -3,6 +3,7 @@ package com.example.app.backend.controller;
 
 
 import com.example.app.backend.exception.UserNotFoundException;
+import com.example.app.backend.exception.UsersNotFoundException;
 import com.example.app.backend.model.User;
 import com.example.app.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,18 +24,23 @@ public class userController {
     User newUser(@RequestBody User newUser){
       return  userRepository.save(newUser);
   }
-  @GetMapping("/users")
-  List<User> getAllUsers(){
-    return userRepository.findAll();
-    
-  }
+
 
   @GetMapping("/user/{id}")
   User getUserById(@PathVariable Long id){
     return userRepository.findById(id)
             .orElseThrow(()->new UserNotFoundException(id));
   }
-@PostMapping("/user/{id}")
+    @GetMapping("/users")
+    public List<User> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        if (users.isEmpty()) {
+            throw new UsersNotFoundException("No users found");
+        }
+        return users;
+    }
+
+@PutMapping("/user/{id}")
   User updateUser(@RequestBody User newUser,@PathVariable Long id){
     return userRepository.findById(id)
             .map(user -> {
@@ -44,6 +50,15 @@ public class userController {
               return userRepository.save(user);
             }).orElseThrow(()->new UserNotFoundException(id));
 }
+
+@DeleteMapping("/user/{id}")
+    String deleteUser(@PathVariable Long id){
+      if(!userRepository.existsById(id)){
+          throw new UserNotFoundException(id);
+      }
+      userRepository.deleteById(id);
+      return "User with id "+id+" has been deleted successfully";
+  }
 
 
 

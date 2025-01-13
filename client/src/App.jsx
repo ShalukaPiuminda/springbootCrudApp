@@ -4,6 +4,8 @@ import Navbar from './layouts/Navbar';
 import Home from './pages/Home';
 import AddUsers from './users/AddUsers';
 import About from './pages/About';
+import EditUsers from './users/EditUser';
+
 
 const App = () => {
   return (
@@ -13,6 +15,7 @@ const App = () => {
         <Route  path="/" element={<Home />} />
         <Route path='/adduser' element={<AddUsers/>}/>
         <Route path='/about' element={<About/>}/>
+        <Route path='/edituser/:id' element={<EditUsers/>}/>
       </Routes>
     </BrowserRouter>
   );

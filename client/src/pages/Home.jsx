@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaEdit, FaTrash, FaEye } from "react-icons/fa";
+import { Link, useParams } from "react-router-dom";
 
 export default function Home() {
   const [users, setUsers] = useState([]);
+
+  const { id } = useParams();
 
   useEffect(() => {
     loadUsers();
@@ -12,6 +15,11 @@ export default function Home() {
   const loadUsers = async () => {
     const result = await axios.get("http://localhost:8080/users");
     setUsers(result.data);
+  };
+
+  const deleteUser = async (id) => {
+    await axios.delete(`http://localhost:8080/user/${id}`);
+    loadUsers();
   };
 
   return (
@@ -42,16 +50,18 @@ export default function Home() {
                     <FaEye className="mr-1 text-black hover:text-gray-500" />
                     <span className="text-black hover:text-gray-500">View</span>
                   </button>
-                  <button
+                  <Link
+                    to={`/edituser/${user.id}`}
                     type="button"
                     className="flex items-center justify-center gap-2 py-2.5 px-3 mb-2 text-sm font-medium text-blue-500 focus:outline-none rounded-lg border border-gray-300 hover:text-blue-500 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-blue-400 dark:border-gray-600 dark:hover:text-blue-400"
                   >
                     <FaEdit className="mr-1 text-blue-500" />
                     <span>Edit</span>
-                  </button>
+                  </Link>
                   <button
                     type="button"
                     className="flex items-center justify-center gap-2 py-2.5 px-3 mb-2 text-sm font-medium text-red-500 focus:outline-none rounded-lg border border-gray-300 hover:text-red-500 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-red-400 dark:border-gray-600 dark:hover:text-red-300"
+                    onClick={() => deleteUser(user.id)}
                   >
                     <FaTrash className="mr-1 text-red-500" />
                     <span>Delete</span>

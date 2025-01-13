@@ -1,12 +1,10 @@
-# Node.js
+# Ignore Node.js modules
 client/node_modules/
+
+# Ignore build files
 client/build/
+backend/target/
 
-# Java
-app.backend/target/
-
-# System Files
-.DS_Store
+# Ignore IDE files
 .idea/
 *.iml
-*.log
